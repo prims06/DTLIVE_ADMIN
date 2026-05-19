@@ -10,10 +10,11 @@ until php -r "new PDO('mysql:host=${DB_HOST};port=${DB_PORT};dbname=${DB_DATABAS
 done
 echo "==> Database is ready."
 
-# Generate app key if missing
+# Verify APP_KEY is set (must be pre-configured in .env)
 if [ -z "$APP_KEY" ] || [ "$APP_KEY" = "base64:" ]; then
-    echo "==> Generating APP_KEY..."
-    php artisan key:generate --no-interaction --force
+    echo "ERROR: APP_KEY is not set in .env — run this to generate one:"
+    echo "  docker run --rm php:8.2-apache php -r \"echo 'base64:'.base64_encode(random_bytes(32));\""
+    exit 1
 fi
 
 # Cache for production
