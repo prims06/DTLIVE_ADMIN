@@ -34,6 +34,9 @@ Route::get('version', function () {
     </h1>";
 });
 
+// Redirect root to admin panel (bypasses shared-hosting installer check)
+Route::get('/', fn() => redirect('/admin/login'));
+
 Route::group(['middleware' => 'installation'], function () {
 
     // Pages
