@@ -22,7 +22,7 @@ RUN composer install --no-scripts --no-autoloader --no-dev --no-interaction
 COPY . .
 
 # Finish composer install
-RUN composer dump-autoload --optimize --no-dev
+RUN composer dump-autoload --optimize --no-dev --no-scripts
 
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
